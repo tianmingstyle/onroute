@@ -11,7 +11,9 @@ scan24Gwifi() {
    iwpriv apcli0 set SiteSurvey=1 && sleep 6 
    scanAp=$(iwpriv apclix0 get_site_survey)
 }
+#如果不能ping通百度，则开始切换热点；否则，退出脚本
 ping -c 3 -w 8 www.baidu.com &> /dev/null && exit
+#如果无线桥接关闭，则将其设置为4模式
 [ `nvram get rt_mode_x` -eq 0 ] && nvram set rt_mode_x=4
 if [ `nvram get rt_mode_x` -ne 0 ];then
 	for apList in $apLists;do
