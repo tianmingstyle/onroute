@@ -18,7 +18,7 @@ ping -c 3 -w 8 www.baidu.com &> /dev/null && exit
 if [ `nvram get rt_mode_x` -ne 0 ];then
 	for apList in $apLists;do
                 #Current wifi works?
-                ping -c 3 -w 8 www.baidu.com &> /dev/null && exit
+                #ping -c 3 -w 8 www.baidu.com &> /dev/null && exit
 
 		apSid=$(echo $apList | awk -F: '{print $1}')
 		apPwd=$(echo $apList | awk -F: '{print $2}')
@@ -42,6 +42,8 @@ if [ `nvram get rt_mode_x` -ne 0 ];then
                          nvram set rt_channel=$ch
                          nvram commit && sleep 2
                          radio2_restart
+			    #Current wifi works?
+                   	    ping -c 3 -w 8 www.baidu.com &> /dev/null && exit
 		else 
 			continue
 		fi
